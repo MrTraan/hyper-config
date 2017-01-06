@@ -1,0 +1,9 @@
+{
+  "name": "mrtraan-hyper-conf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mousetrap": "^1.6.0"
+  }
+}
