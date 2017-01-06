@@ -1,4 +1,4 @@
-t Mousetrap = require('mousetrap');
+const Mousetrap = require('mousetrap');
 
 const prevTabKey = "Ctrl+Shift+Tab";
 const nextTabKey = "Ctrl+Tab";
