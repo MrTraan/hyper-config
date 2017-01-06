@@ -2,11 +2,10 @@ const Mousetrap = require('mousetrap');
 
 const prevTabKey = "Ctrl+Shift+Tab";
 const nextTabKey = "Ctrl+Tab";
-const prevPaneKey = "CmdOrCtrl+[";
-const nextPaneKey = "CmdOrCtrl+]";
+const prevPaneKey = "mod+[";
+const nextPaneKey = "mod+]";
 
 const merge = (one, two) => Object.assign({}, one, two);
-const mousetrapify = key => key.replace('CmdOrCtrl', 'mod').toLowerCase();
 
 let focusedWindow;
 const registerWindow = win => {
@@ -64,11 +63,11 @@ const decorateTerms = (Terms, { React, notify, Notification }) => {
       const keys = new Mousetrap(document);
 
       keys.bind(
-          mousetrapify(prevPaneKey),
+          prevPaneKey,
           () => selectPane('prev')
           );
       keys.bind(
-          mousetrapify(nextPaneKey),
+          nextPaneKey,
           () => selectPane('next')
           );
 
