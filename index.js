@@ -1,9 +1,14 @@
 const { onWindow, decorateTerms, decorateMenu } = require('./itermPaneShortcuts.js');
-const { decorateConfig } = require('./monokaiTheme.js');
+const cursor = require('./cursor.js');
+const monokai = require('./monokaiTheme.js');
 
 module.exports = {
   onWindow,
   decorateTerms,
   decorateMenu,
-  decorateConfig,
+  decorateConfig : config => {
+    const step1 = cursor(config);
+    const step2 = monokai(step1);
+    return step2;
+  }
 }
