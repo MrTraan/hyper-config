@@ -7,8 +7,8 @@ module.exports = {
   decorateTerms,
   decorateMenu,
   decorateConfig : config => {
-    const step1 = cursor(config);
-    const step2 = monokai(step1);
+    const step1 = cursor.decorateConfig(config);
+    const step2 = monokai.decorateConfig(step1);
     return step2;
   }
 }
