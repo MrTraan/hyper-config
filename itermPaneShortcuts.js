@@ -2,10 +2,11 @@ const Mousetrap = require('mousetrap');
 
 const prevTabKey = "Ctrl+Shift+Tab";
 const nextTabKey = "Ctrl+Tab";
-const prevPaneKey = "mod+[";
-const nextPaneKey = "mod+]";
+const prevPaneKey = "Cmd+[";
+const nextPaneKey = "Cmd+]";
 
 const merge = (one, two) => Object.assign({}, one, two);
+const mousetrapify = key => key.replace('CmdOrCtrl', 'mod').toLowerCase();
 
 let focusedWindow;
 const registerWindow = win => {
@@ -48,12 +49,14 @@ const decorateTerms = (Terms, { React, notify, Notification }) => {
       this.handleFocusActive = this.handleFocusActive.bind(this);
       this.onTermsRef = this.onTermsRef.bind(this);
     }
+
     handleFocusActive() {
       const term = this.terms.getActiveTerm();
       if (term) {
         term.focus();
       }
     }
+
     attachKeyListeners() {
       const term = this.terms.getActiveTerm();
       if (!term) {
@@ -63,19 +66,21 @@ const decorateTerms = (Terms, { React, notify, Notification }) => {
       const keys = new Mousetrap(document);
 
       keys.bind(
-          prevPaneKey,
-          () => selectPane('prev')
-          );
+        mousetrapify(prevPaneKey),
+        () => selectPane('prev')
+      );
       keys.bind(
-          nextPaneKey,
-          () => selectPane('next')
-          );
+        mousetrapify(nextPaneKey),
+        () => selectPane('next')
+      );
 
       this.keys = keys;
     }
+
     onTermsRef(terms) {
       this.terms = terms;
     }
+
     componentDidUpdate(prev) {
       if (prev.activeSession !== this.props.activeSession) {
         if (this.keys) {
@@ -85,6 +90,7 @@ const decorateTerms = (Terms, { React, notify, Notification }) => {
         this.attachKeyListeners();
       }
     }
+
     componentWillUnmount() {
       if (this.keys) {
         this.keys.reset();
